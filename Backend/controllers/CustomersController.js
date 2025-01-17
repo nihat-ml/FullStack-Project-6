@@ -8,18 +8,24 @@ export const CustomersController = {
     },
     getById: async (req,res)=>{
         let id = req.params.id
-        let mycustomer = await CustomerModel.findById()
+        let mycustomer = await CustomerModel.findById(id)
         res.send({
             message:"customer finded",
             data: mycustomer
         })
     },
     deleteCustomer: async (req ,res)=>{
-        let {id} = req.params
-        await CustomerModel.findByIdAndDelete()
-        res.send({
-            message:"customer deleted"
-        }) 
+        // let {id} = req.params
+        // await CustomerModel.findByIdAndDelete(id)
+        // res.send({
+        //     message:"Customer deleted"
+        // }) 
+        try {
+            await CustomerModel.findByIdAndDelete(req.params.id)
+            res.status(204).send()
+        } catch (error) {
+            res.status(400).json({message:"Deleted"})
+        }
     },
     postCustomer: async (req, res)=>{
         let newCustomer = CustomerModel(req.body)

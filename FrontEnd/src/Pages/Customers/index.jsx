@@ -9,6 +9,8 @@ function Customers() {
     const [searchItem, setSearchItem] = useState('')
     const [filteredCustomers, setFilteredCustomers] = useState([])
     const [originalCustomers, setOriginalCustomers] = useState([])
+
+    
     
     
     const handleInputChange = (e) => { 
